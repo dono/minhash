@@ -1,20 +1,20 @@
 # minhash
 b-bit minhash (b=1)
 
-# Feature
+## Feature
 - Use MurmurHash3 (128-bit)
 - The number of hash functions is 128
 
-# Require
+## Require
 - Go 1.9 or above
 - spaolacci/murmur3 [https://github.com/spaolacci/murmur3]
 
-# Install
+## Install
 ```
 go get github.com/dono/minhash
 ```
 
-# Usage
+## Usage
 ```
 d1 := []string{"foo", "bar", "baz", "qux", "quux"}
 d2 := []string{"foo", "bar", "baz", "corge", "grault"}
@@ -26,5 +26,5 @@ jaccard := minhash.Jaccard(s1, s2)
 fmt.Println(jaccard)
 ```
 
-# License
+## License
 MIT
