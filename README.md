@@ -6,7 +6,6 @@ b-bit minhash (b=1)
 - The number of hash functions is 128
 
 ## Require
-- Go 1.9 or above
 - spaolacci/murmur3 [https://github.com/spaolacci/murmur3]
 
 ## Install

@@ -2,7 +2,6 @@ package minhash
 
 import (
 	"math/big"
-	"math/bits"
 
 	"github.com/spaolacci/murmur3"
 )
@@ -36,7 +35,7 @@ func Jaccard(s1, s2 []byte) float32 {
 	sb2 := big.NewInt(0).SetBytes(s2)
 	popCnt := 0
 	for _, byte := range sb1.Xor(sb1, sb2).Bytes() {
-		popCnt += bits.OnesCount8(uint8(byte))
+		popCnt += onesCount8(uint8(byte))
 	}
 	return 2.0 * (float32(k-popCnt)/float32(k) - 0.5)
 }
