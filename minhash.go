@@ -12,20 +12,22 @@ const (
 
 func Sketch(words []string) []byte {
 	sketch := big.NewInt(0)
-	for i := 0; i < k; i++ {
-		min := make([]uint64, 2)
-		min[0], min[1] = murmur3.Sum128WithSeed([]byte(words[0]), uint32(i))
-		for j := 1; j < len(words); j++ {
-			h1, h2 := murmur3.Sum128WithSeed([]byte(words[j]), uint32(i))
-			if h1 < min[0] {
-				min[0] = h1
-				min[1] = h2
-			} else if h1 == min[0] && h2 < min[1] {
-				min[0] = h1
-				min[1] = h2
+	if len(words) != 0 {
+		for i := 0; i < k; i++ {
+			min := make([]uint64, 2)
+			min[0], min[1] = murmur3.Sum128WithSeed([]byte(words[0]), uint32(i))
+			for j := 1; j < len(words); j++ {
+				h1, h2 := murmur3.Sum128WithSeed([]byte(words[j]), uint32(i))
+				if h1 < min[0] {
+					min[0] = h1
+					min[1] = h2
+				} else if h1 == min[0] && h2 < min[1] {
+					min[0] = h1
+					min[1] = h2
+				}
 			}
+			sketch.SetBit(sketch, i, uint(min[1]&0x1))
 		}
-		sketch.SetBit(sketch, i, uint(min[1]&0x1))
 	}
 	return sketch.Bytes()
 }
